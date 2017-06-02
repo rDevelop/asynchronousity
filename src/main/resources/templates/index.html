@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!--/*/ <th:block th:include="fragments/inc-header :: head"></th:block> /*/-->
+    <title>Asyncronousity</title>
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/navbar :: navbar"></th:block> /*/-->
+<div class="container-fluid">
+    <div class="row">
+        <!--/*/ <th:block th:include="fragments/navbar :: sidebar"></th:block> /*/-->
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <!--/*/ <th:block th:include="fragments/banner :: images"></th:block> /*/-->
+            <th:block th:switch="${title}" th:remove="tag">
+                <th:block th:case="'Articles'">
+                    <!--/*/ <th:block th:include="fragments/articles :: articles"></th:block> /*/-->
+                </th:block>
+                <th:block th:case="'Sources'">
+                    <!--/*/ <th:block th:include="fragments/sources :: sources"></th:block> /*/-->
+                </th:block>
+            </th:block>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+</head>
+<body>
+<div th:fragment="images" th:remove="tag">
+    <div class="row placeholders">
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <a href="/index/articles/hacker-news/latest">
+            <img src="/images/hackernews.jpg" width="200" height="200" class="img-responsive" alt="Hacker News"/>
+            </a>
+            <h4>Hacker News</h4>
+            <span class="text-muted">technology</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <img src="/images/bloomberg.png" width="200" height="200" class="img-responsive" alt="Bloomberg"/>
+            <h4>Bloomberg</h4>
+            <span class="text-muted">business</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <img src="/images/espn.png" width="200" height="200" class="img-responsive" alt="ESPN"/>
+            <h4>ESPN</h4>
+            <span class="text-muted">sport</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <img src="/images/reddit.jpg" width="200" height="200" class="img-responsive" alt="Reddit /r/all"/>
+            <h4>Reddit /r/all</h4>
+            <span class="text-muted">general</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

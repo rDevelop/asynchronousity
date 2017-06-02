@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+</head>
+<body>
+<div th:fragment="welcome">
+    <h1 class="cover-heading">Welcome</h1>
+    <p class="lead">
+        MaxBit is a user-friendly web interface to the ItBit exchange. Fully functional for trading and account management. The backend technology can be integrated into other systems. Enjoy this demo and if you're only viewing as a guest, the pages will
+        be read only and trading is not available.
+    </p>
+</div>
+
+<div th:fragment="loading">
+    <h1 class="cover-heading">Features</h1>
+    <p class="lead">
+        News still loading.
+    </p>
+</div>
+
+<div th:fragment="features">
+    <h1 class="cover-heading">Features</h1>
+    <p class="lead">
+        Get ticker info, the full order book, and recent trades for the specified market. Place, get, and cancel an order. Create fiat and cryptocurrency withdrawls and deposits. Create wallets.  Get trades, funding, and balance history for a wallet. Transfer funds between your wallets and your itBit account.
+    </p>
+</div>
+
+<div th:fragment="contact">
+    <h1 class="cover-heading">Contact</h1>
+    <p class="lead">
+        <a href="emailto:roblitvin@me.com">Email rlit.us</a> for questions regarding demo accounts or for information about the MaxBit platform.
+    </p>
+</div>
+
+<div th:fragment="login">
+    <!--/*/ <th:block th:include="fragments/login :: login"></th:block> /*/-->
+</div>
+
+<div th:fragment="loginError">
+    <h1 class="cover-heading">Login Error</h1>
+    <p class="lead">
+        You're login is invalid. If you're a guest or haven't received a login, please use username: guest and password: guest.
+    </p>
+</div>
+
+
+<div th:fragment="logout">
+    <h1 class="cover-heading">Logged Out</h1>
+    <p class="lead">
+        You're successfully logged out. Come back soon!
+    </p>
+</div>
+
+<div th:fragment="error">
+    <h1 class="cover-heading">Ooops!</h1>
+    <p class="lead">
+        Embarrassing, we've encountered an error most likely because you did something unexpected!
+    </p>
+</div>
+
+</body>
+</html>

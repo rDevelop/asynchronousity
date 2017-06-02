@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+</head>
+<body>
+    <div th:fragment="articles" th:remove="tag">
+        <h2 class="sub-header" th:text="${source}">Source</h2>
+        <div class="table-responsive">
+            <table class="table table-striped" th:if="${articles != null and not #lists.isEmpty(articles)}">
+                <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="article : ${articles}">
+
+                        <!--private String author;-->
+                        <!--private String title;-->
+                        <!--private String description;-->
+                        <!--private String url;-->
+                        <!--private String urlToImage;-->
+                        <!--private String publishedAt;-->
+
+                        <td th:text="${article.author}">Author</td>
+                        <td th:text="${article.title}">Title</td>
+                        <td th:text="${article.description}">Description</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
