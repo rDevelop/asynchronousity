@@ -42,20 +42,22 @@ public class NewsService {
     @Async
     public Future<Articles> getArticles(String source, String sort) throws InterruptedException {
         //https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest
+        source = source.toLowerCase();
         String url = String.format("%s/articles?source=%s&sortBy=%s&apiKey=%s",apiInfo().getUrl(), source, sort, apiInfo().getKey());
         logger.info("Looking up articles at " + url);
         Articles results = restTemplate.getForObject(url, Articles.class);
-        logger.info("Found articles...");
+        logger.info("Found articles.");
         return new AsyncResult<>(results);
     }
 
     @Async
     public Future<Articles> getArticles(String source) throws InterruptedException {
         //https://newsapi.org/v1/articles?source=the-next-web
+        source = source.toLowerCase();
         String url = String.format("%s/articles?source=%s&apiKey=%s",apiInfo().getUrl(), source, apiInfo().getKey());
         logger.info("Looking up articles at " + url);
         Articles results = restTemplate.getForObject(url, Articles.class);
-        logger.info("Found articles...");
+        logger.info("Found articles.");
         return new AsyncResult<>(results);
     }
 
@@ -64,11 +66,12 @@ public class NewsService {
         //"https://newsapi.org/v1/sources?language=en"
         String url = String.format("%s/sources?language=%s&apiKey=%s", apiInfo().getUrl(), language, apiInfo().getKey());
         if(category != null) {
+            category = category.toLowerCase();
             url = String.format("%s/sources?category=%s&language=%s&apiKey=%s", apiInfo().getUrl(), category, language, apiInfo().getKey());
         }
         logger.info("Looking up news sources at " + url);
         Sources results = restTemplate.getForObject(url, Sources.class);
-        logger.info("Found sources...");
+        logger.info("Found sources.");
         return new AsyncResult<>(results);
     }
 

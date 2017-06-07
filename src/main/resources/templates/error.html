@@ -7,14 +7,11 @@
             <!--/*/ <th:block th:include="fragments/inc-cover :: head"></th:block> /*/-->
         </th:block>
     </th:block>
-    <title>Asyncronousity</title>
+    <title>Asynchronousity</title>
 </head>
 <body>
     <div class="site-wrapper">
     <th:block th:switch="${fragment}" th:remove="tag">
-        <th:block th:case="'login'">
-            <!--/*/ <th:block th:include="fragments/login :: login"></th:block> /*/-->
-        </th:block>
         <th:block th:case="*">
             <!--/*/ <th:block th:include="fragments/inc-cover :: head"></th:block> /*/-->
             <div class="site-wrapper-inner">
@@ -24,18 +21,15 @@
                             <h3 class="masthead-brand">Asyncronousity</h3>
                             <nav>
                                 <ul class="nav masthead-nav">
-                                    <li class="active"><a href="" th:href="@{/index}">Home</a></li>
-                                    <li><a href="" th:href="@{/index/features}">Features</a></li>
-                                    <li><a href="" th:href="@{/index/contact}">Contact</a></li>
+                                    <li class="active"><a href="" th:href="@{/}">Home</a></li>
+                                    <li><a href="" th:href="@{/news/top}">Top</a></li>
+                                    <li><a href="" th:href="@{/news/latest}">Latest</a></li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                     <div class="inner cover" >
                         <!--/*/ <th:block th:include="fragments/cover :: error"></th:block> /*/-->
-                        <p class="lead">
-                            <a href="" th:href="@{/index/login}" class="btn btn-lg btn-default">Enter</a>
-                        </p>
                         <p class="lead">
                         <canvas id="Canvas">
                             rlit.us

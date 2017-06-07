@@ -7,9 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import us.rlit.asyncronousity.api.domain.Article;
 import us.rlit.asyncronousity.api.domain.Articles;
-import us.rlit.asyncronousity.api.domain.Source;
 import us.rlit.asyncronousity.api.domain.Sources;
 import us.rlit.asyncronousity.api.services.NewsServices;
 import us.rlit.asyncronousity.api.services.ServiceRunner;
@@ -20,9 +18,9 @@ import java.util.concurrent.Future;
  * Created by rob on 4/4/17.
  */
 @Controller
-public class IndexController {
+public class NewsController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final static String index = "index";
+    private final static String news = "news";
     private final static String title = "title";
     private NewsServices newsService;
     @Autowired
@@ -33,103 +31,101 @@ public class IndexController {
     @RequestMapping("/")
     public String root() {
         logger.info("root");
-        return "redirect:/index";
+        return "redirect:/news/first";
     }
 
-    @RequestMapping("/index")
-    public String index(Model model) throws Exception {
-        logger.info("index - first article");
-        Future<Articles> articles = ServiceRunner.getFirstArticle();
+    @RequestMapping("/news")
+    public String news(Model model) throws Exception {
+        logger.info("news");
+        return "redirect:/news/first";
+    }
+
+    @RequestMapping("/news/first")
+    public String first(Model model) throws Exception {
+        logger.info("news - first article");
+        Future<Articles> articles = ServiceRunner.getFirstArticles();
         model.addAttribute(title, "Articles");
-        model.addAttribute("source", "asyncronousity news feed");
+        model.addAttribute("source", articles.get().getSource());
         model.addAttribute("articles", articles.get().getArticles());
-        return index;
+        model.addAttribute("bannerImages" , ServiceRunner.getBannerImages());
+        return news;
     }
 
-    @RequestMapping("/index/sources")
+    @RequestMapping("/news/sources")
     public String sources(Model model) throws Exception {
-        logger.info("index/sources");
+        logger.info("news/sources");
         Future<Sources> sources = ServiceRunner.getAllSources();
-
-        for(Source s : sources.get().getSources()) {
-            logger.info(s.toString());
-        }
-
         model.addAttribute(title, "Sources");
+        model.addAttribute("category", "all");
         model.addAttribute("sources", sources.get().getSources());
-        return index;
+        model.addAttribute("bannerImages" , ServiceRunner.getBannerImages());
+        return news;
     }
 
-    @RequestMapping("/index/sources/{category}")
+    @RequestMapping("/news/sources/{category}")
     public String sources(@PathVariable String category, Model model) throws Exception {
-        logger.info("index/sources/{" + category +"}");
-
-
+        logger.info("news/sources/{" + category +"}");
         Future<Sources> sources = ServiceRunner.getSources(category);
-
         model.addAttribute(title, "Sources");
+        model.addAttribute("category", category);
         model.addAttribute("sources", sources.get().getSources());
-        return index;
+        model.addAttribute("bannerImages" , ServiceRunner.getBannerImages());
+        return news;
     }
 
-    @RequestMapping("/index/top")
+    @RequestMapping("/news/top")
     public String top(Model model) throws Exception {
-        logger.info("index/top");
-        //Future<Sources> sources = ServiceRunner.getSources();
-        model.addAttribute(title, "Top");
-        //model.addAttribute("sources", sources.get().getSources());
-        return index;
+        logger.info("news/top");
+        Future<Articles> tops = ServiceRunner.getTopArticles();
+        while(!tops.isDone()) {
+            // wait for it..
+        }
+        model.addAttribute(title, "Articles");
+        model.addAttribute("source", tops.get().getSource());
+        model.addAttribute("articles", tops.get().getArticles());
+        model.addAttribute("bannerImages" , ServiceRunner.getBannerImages());
+        return news;
     }
 
-    @RequestMapping("/index/latest")
+    @RequestMapping("/news/latest")
     public String latest(Model model) throws Exception {
-        logger.info("index/latest");
-        //Future<Sources> sources = ServiceRunner.getSources();
-
-        model.addAttribute("title", "Lastest");
-        //model.addAttribute("sources", sources.get().getSources());
-        return index;
+        logger.info("news/latest");
+        Future<Articles> latest = ServiceRunner.getLatestArticles();
+        while(!latest.isDone()) {
+            // wait for it..
+        }
+        model.addAttribute(title, "Articles");
+        model.addAttribute("source", latest.get().getSource());
+        model.addAttribute("articles", latest.get().getArticles());
+        model.addAttribute("bannerImages" , ServiceRunner.getBannerImages());
+        return news;
     }
 
-    @RequestMapping("/index/popular")
-    public String popular(Model model) throws Exception {
-        logger.info("index/popular");
-        //Future<Sources> sources = ServiceRunner.getSources();
-
-        model.addAttribute("title", "Popular");
-        //model.addAttribute("sources", sources.get().getSources());
-        return index;
-    }
-
-    @RequestMapping("/index/articles/{source}")
+    @RequestMapping("/news/articles/{source}")
     public String articleBySource(@PathVariable String source, Model model) throws Exception {
-        logger.info("index/articles %s %s", source);
+        logger.info("news/articles %s %s", source);
         Future<Articles> articles = newsService.getArticles(source);
         while(!articles.isDone()) {
             // wait for service to finish fetching articles.
         }
-        for(Article article : articles.get().getArticles()) {
-            logger.info(article.toString());
-        }
         model.addAttribute(title, "Articles");
         model.addAttribute("source", articles.get().getSource());
         model.addAttribute("articles", articles.get().getArticles());
-        return index;
+        model.addAttribute("bannerImages" , ServiceRunner.getBannerImages());
+        return news;
     }
 
-    @RequestMapping("/index/articles/{source}/{sort}")
+    @RequestMapping("/news/articles/{source}/{sort}")
     public String articleBySourceAndSort(@PathVariable String source, @PathVariable String sort, Model model) throws Exception {
-        logger.info("index/articles %s %s", source, sort);
+        logger.info("news/articles %s %s", source, sort);
         Future<Articles> articles = newsService.getArticles(source,sort);
         while(!articles.isDone()) {
             // wait for service to finish fetching articles.
         }
-        for(Article article : articles.get().getArticles()) {
-            logger.info(article.toString());
-        }
         model.addAttribute(title, "Articles");
         model.addAttribute("source", articles.get().getSource());
         model.addAttribute("articles", articles.get().getArticles());
-        return index;
+        model.addAttribute("bannerImages" , ServiceRunner.getBannerImages());
+        return news;
     }
 }

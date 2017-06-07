@@ -13,7 +13,7 @@ public class ApiManager {
      * Will get the bean info on boot
      * @param apiInfo bean info
      */
-    ApiManager(ApiInfo apiInfo)
+    private ApiManager(ApiInfo apiInfo)
     {
         ApiManager.apiInfo = apiInfo;
     }

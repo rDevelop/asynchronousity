@@ -8,7 +8,7 @@ import us.rlit.asyncronousity.api.domain.Sources;
 import java.util.concurrent.Future;
 
 /**
- * Created by rob on 4/4/17.
+ * Implementation of the news service contract.
  */
 @Service
 public class NewsServiceImplementer implements NewsServices {

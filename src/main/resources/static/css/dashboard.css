@@ -32,6 +32,7 @@ body {
 /* Hide for mobile, show later */
 .sidebar {
   display: none;
+  background-image: url(../images/technic.jpg);
 }
 @media (min-width: 768px) {
   .sidebar {

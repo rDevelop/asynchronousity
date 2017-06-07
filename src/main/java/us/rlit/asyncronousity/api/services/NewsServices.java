@@ -6,7 +6,7 @@ import us.rlit.asyncronousity.api.domain.Sources;
 import java.util.concurrent.Future;
 
 /**
- * Created by rob on 4/4/17.
+ * Interface for the NewsService class. Sources are gathered in Service Runner and not needed at this time.
  */
 public interface NewsServices {
     Future<Articles> getArticles(String source) throws InterruptedException;

@@ -8,24 +8,13 @@
         <h2 class="sub-header" th:text="${source}">Source</h2>
         <div class="table-responsive">
             <table class="table table-striped" th:if="${articles != null and not #lists.isEmpty(articles)}">
-                <thead>
-                <tr>
-                    <th>Author</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                </tr>
-                </thead>
                 <tbody>
                     <tr th:each="article : ${articles}">
-
-                        <!--private String author;-->
-                        <!--private String title;-->
-                        <!--private String description;-->
-                        <!--private String url;-->
-                        <!--private String urlToImage;-->
-                        <!--private String publishedAt;-->
-
-                        <td th:text="${article.author}">Author</td>
+                        <td>
+                            <a th:href="${article.url}">
+                            <img th:src="${article.urlToImage}" class="img-responsive" th:alt="${article.title}"/>
+                            </a>
+                        </td>
                         <td th:text="${article.title}">Title</td>
                         <td th:text="${article.description}">Description</td>
                     </tr>
