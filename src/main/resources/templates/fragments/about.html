@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!--/*/ <th:block th:include="fragments/inc-cover :: head"></th:block> /*/-->
+</head>
+<body>
+    <div th:fragment="about" th:remove="tag">
+        <h2>About Asynchronousity</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th>Responsive news feed</th>
+
+                </tr>
+                <tr>
+                    <td>
+                        A <a href="https://github.com/rDevelop/asynchronousity">Spring Boot web application</a> that uses asynchronous web requests to gather news from <a href="http://www.newsapi.org">newsapi
+                        .org</a>.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="mastfoot">
+        <div class="inner">
+            <p class="text-muted">&copy; 2017 rlit.us &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </div>
+    </div>
+</body>
+</html>

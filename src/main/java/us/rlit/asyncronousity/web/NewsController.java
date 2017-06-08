@@ -34,8 +34,16 @@ public class NewsController {
         return "redirect:/news/first";
     }
 
+    @RequestMapping("/news/about")
+    public String about(Model model) {
+        logger.info("/news/about");
+        model.addAttribute(title, "About");
+        return news;
+    }
+
+
     @RequestMapping("/news")
-    public String news(Model model) throws Exception {
+    public String news() {
         logger.info("news");
         return "redirect:/news/first";
     }
@@ -103,7 +111,7 @@ public class NewsController {
 
     @RequestMapping("/news/articles/{source}")
     public String articleBySource(@PathVariable String source, Model model) throws Exception {
-        logger.info("news/articles %s %s", source);
+        logger.info("news/articles/{" + source +"}");
         Future<Articles> articles = newsService.getArticles(source);
         while(!articles.isDone()) {
             // wait for service to finish fetching articles.
@@ -117,7 +125,7 @@ public class NewsController {
 
     @RequestMapping("/news/articles/{source}/{sort}")
     public String articleBySourceAndSort(@PathVariable String source, @PathVariable String sort, Model model) throws Exception {
-        logger.info("news/articles %s %s", source, sort);
+        logger.info("news/articles/{" + source +"}/{" + sort +"}");
         Future<Articles> articles = newsService.getArticles(source,sort);
         while(!articles.isDone()) {
             // wait for service to finish fetching articles.
