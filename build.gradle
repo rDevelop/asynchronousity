@@ -14,8 +14,8 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
-//sourceCompatibility = 1.8
-//stargetCompatibility = 1.8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -38,3 +38,6 @@ task wrapper(type: Wrapper) {
     gradleVersion = '3.3'
     distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
+
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
