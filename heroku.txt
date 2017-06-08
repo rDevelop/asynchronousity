@@ -1,0 +1,12 @@
+https://devcenter.heroku.com/articles/procfile
+
+
+git init .  // new
+git remote -a asynchronousity  // update
+heroku git:remote -a asynchronousity
+
+git add .
+git commit -m "Updating code."
+heroku login
+heroku create asynchronousity
+git push heroku master
