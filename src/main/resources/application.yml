@@ -8,3 +8,10 @@ api:
   url: https://newsapi.org/v1
   # Get your own key bro...
   key: b44e03f3c1f34178a6375f8217346032
+
+---
+
+spring:
+  thymeleaf:
+    cache: false
+  devtools.restart.enabled: true
