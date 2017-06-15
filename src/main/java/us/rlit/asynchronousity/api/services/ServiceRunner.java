@@ -1,18 +1,17 @@
-package us.rlit.asyncronousity.api.services;
+package us.rlit.asynchronousity.api.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
-import us.rlit.asyncronousity.api.domain.Articles;
-import us.rlit.asyncronousity.api.domain.BannerImage;
-import us.rlit.asyncronousity.api.domain.Source;
-import us.rlit.asyncronousity.api.domain.Sources;
+import us.rlit.asynchronousity.api.domain.Articles;
+import us.rlit.asynchronousity.api.domain.BannerImage;
+import us.rlit.asynchronousity.api.domain.Source;
+import us.rlit.asynchronousity.api.domain.Sources;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Service runner that will get sources on WebStart.
@@ -31,8 +30,14 @@ public class ServiceRunner implements CommandLineRunner {
     private static Future<Articles> firstArticles;
     private static List<Future<Articles>> topArticles = new LinkedList<>();
     private static List<Future<Articles>> latestArticles = new LinkedList<>();
-    private static BannerImage[] bannerImages = new BannerImage[6];
+    private static BannerImage[] bannerImages = new BannerImage[4];
 
+    static {
+        bannerImages[0] = new BannerImage("/images/bloomberg.png", "Bloomberg", "bloomberg", "business");
+        bannerImages[1] = new BannerImage("/images/espn.png", "ESPN", "espn", "sport");
+        bannerImages[2] = new BannerImage("/images/techcrunch.png", "TechCrunch", "techcrunch", "technology");
+        bannerImages[3] = new BannerImage("/images/buzzfeed.jpg", "Buzzfeed", "buzzfeed", "entertainment");
+    }
 
     public ServiceRunner(NewsService newsService) {
 
@@ -47,73 +52,73 @@ public class ServiceRunner implements CommandLineRunner {
         categories.put("sport", source);
         categories.put("technology", source);
 
-        bannerImages[0] = new BannerImage("/images/bloomberg.png", "Bloomberg", "bloomberg", "business");
-        bannerImages[1] = new BannerImage("/images/espn.png", "ESPN", "espn", "sport");
-        bannerImages[2] = new BannerImage("/images/techcrunch.png", "TechCrunch", "techcrunch", "technology");
-        bannerImages[3] = new BannerImage("/images/mtvnews.png", "MTV News", "mtv-news", "music");
-        bannerImages[4] = new BannerImage("/images/buzzfeed.jpg", "Buzzfeed", "buzzfeed", "entertainment");
-        bannerImages[5] = new BannerImage("/images/reddit.jpg", "Reddit /r/all", "reddit-r-all", "general");
-        bannerImages[5] = new BannerImage("/images/more.png", "More Sources", "all", "sources");
-
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        allSources = newsService.getSources(null, "en");
-        firstArticles = newsService.getArticles("reuters", "latest");
-        for (Map.Entry<String, Future<Sources>> entry : categories.entrySet()) {
-            source = newsService.getSources(entry.getKey(), "en");
-            categories.put(entry.getKey(), source);
-            for (Source s : entry.getValue().get().getSources()) {
-                for (String sort : s.getSortBysAvailable()) {
-                    sortableBy.put(s.getId(), sort);
+    public void run(String... args) throws ExecutionException, InterruptedException  {
+        Thread backgroundServices = new Thread(() -> {
+            try {
+                firstArticles = newsService.getArticles("reuters", "latest");
+                allSources = newsService.getSources(null, "en");
+                    for (Map.Entry<String, Future<Sources>> entry : categories.entrySet()) {
+                        source = newsService.getSources(entry.getKey(), "en");
+                        categories.put(entry.getKey(), source);
+                        for (Source s : entry.getValue().get().getSources()) {
+                            for (String sort : s.getSortBysAvailable()) {
+                                sortableBy.put(s.getId(), sort);
+                            }
+                        }
+                    }
+                    setArticlesBySort();
+                } catch(ExecutionException | InterruptedException e ){
+                    logger.error("Background thread exception {}", e);
                 }
-            }
-        }
-        setArticlesBySort();
+        });
+        backgroundServices.start();
+        logger.info("Started background services, moving on....");
     }
+
 
     public static BannerImage[] getBannerImages() {
         return bannerImages;
     }
 
-    public static Future<Articles> getFirstArticles() throws Exception {
+    public static Future<Articles> getFirstArticles() {
         while (!firstArticles.isDone()) {
             logger.info("Fetching first article");
         }
         return firstArticles;
     }
 
-    public static Future<Sources> getAllSources() throws Exception {
+    public static Future<Sources> getAllSources() {
         while (!allSources.isDone()) {
             logger.info("Fetching all sources");
         }
         return allSources;
     }
 
-    public static Future<Sources> getSources(String category) throws Exception {
-        category = category.toLowerCase();
-        if ("all".equalsIgnoreCase(category)) {
+    public static Future<Sources> getSources(String category) {
+        if ("all".equalsIgnoreCase(category.toLowerCase())) {
             return getAllSources();
         }
-        Future<Sources> source = categories.get(category);
+        Future<Sources> source = categories.get(category.toLowerCase());
         while (!source.isDone()) {
-            logger.info("Fetching source: " + category);
+            logger.info("Fetching source: {}", category);
         }
         return source;
     }
 
     public static Future<Articles> getTopArticles() {
-        int randomIndex = (int) (Math.random() * topArticles.size());
+        int randomIndex = ThreadLocalRandom.current().nextInt(0, topArticles.size());
         return topArticles.get(randomIndex);
     }
 
     public static Future<Articles> getLatestArticles() {
-        int randomIndex = (int) (Math.random() * topArticles.size());
+        int randomIndex = ThreadLocalRandom.current().nextInt(0, latestArticles.size());
         return latestArticles.get(randomIndex);
     }
 
-    public void setArticlesBySort() throws Exception {
+    public void setArticlesBySort() throws ExecutionException, InterruptedException {
         for (Map.Entry<String, String> entry : sortableBy.entrySet()) {
             Future<Articles> articlesFuture = newsService.getArticles(entry.getKey(), entry.getValue());
             articlesFuture.get();

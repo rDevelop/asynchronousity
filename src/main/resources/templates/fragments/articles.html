@@ -4,23 +4,24 @@
 <head>
 </head>
 <body>
-    <div th:fragment="articles" th:remove="tag">
-        <h2 class="sub-header" th:text="${source}">Source</h2>
-        <div class="table-responsive">
-            <table class="table table-striped" th:if="${articles != null and not #lists.isEmpty(articles)}">
-                <tbody>
-                    <tr th:each="article : ${articles}">
-                        <td>
-                            <a th:href="${article.url}">
-                            <img th:src="${article.urlToImage}" class="img-responsive" th:alt="${article.title}"/>
-                            </a>
-                        </td>
-                        <td th:text="${article.title}">Title</td>
-                        <td th:text="${article.description}">Description</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div th:fragment="articles" th:remove="tag">
+                <h2 th:text="${source}">Source</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped" th:if="${articles != null and not #lists.isEmpty(articles)}">
+                        <tbody>
+                            <tr th:each="article : ${articles}">
+                                <td>
+                                    <a th:href="${article.url}">
+                                    <img class="img-responsive" width="100%" th:src="${article.urlToImage}"
+                                         th:alt="${article.title}"/>
+                                    </a>
+                                </td>
+                                <td th:text="${article.title}">Title</td>
+                                <td th:text="${article.description}">Description</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
 </body>
 </html>

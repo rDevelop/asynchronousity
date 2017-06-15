@@ -1,4 +1,4 @@
-package us.rlit.asyncronousity.api;
+package us.rlit.asynchronousity.api;
 
 import org.springframework.stereotype.Component;
 

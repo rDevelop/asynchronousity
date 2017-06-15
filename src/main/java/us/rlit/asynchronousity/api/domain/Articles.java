@@ -1,4 +1,4 @@
-package us.rlit.asyncronousity.api.domain;
+package us.rlit.asynchronousity.api.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

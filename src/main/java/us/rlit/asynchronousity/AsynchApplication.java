@@ -1,4 +1,4 @@
-package us.rlit.asyncronousity;
+package us.rlit.asynchronousity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,8 +8,8 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import us.rlit.asyncronousity.api.services.NewsService;
-import us.rlit.asyncronousity.api.services.ServiceRunner;
+import us.rlit.asynchronousity.api.services.NewsService;
+import us.rlit.asynchronousity.api.services.ServiceRunner;
 
 import java.util.concurrent.Executor;
 
@@ -19,14 +19,14 @@ import java.util.concurrent.Executor;
  */
 @EnableAsync
 @SpringBootApplication
-public class Application extends AsyncConfigurerSupport {
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
+public class AsynchApplication extends AsyncConfigurerSupport {
+    private static final Logger logger = LoggerFactory.getLogger(AsynchApplication.class);
     /**
      * Entry point for all spring boot applications.
      * @param args arguments
      */
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(AsynchApplication.class, args);
         try {
             new ServiceRunner(new NewsService(new RestTemplateBuilder())).run();
         } catch (Exception e) {

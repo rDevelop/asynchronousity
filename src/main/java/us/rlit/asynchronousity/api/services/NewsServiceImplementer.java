@@ -1,9 +1,9 @@
-package us.rlit.asyncronousity.api.services;
+package us.rlit.asynchronousity.api.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import us.rlit.asyncronousity.api.domain.Articles;
-import us.rlit.asyncronousity.api.domain.Sources;
+import us.rlit.asynchronousity.api.domain.Articles;
+import us.rlit.asynchronousity.api.domain.Sources;
 
 import java.util.concurrent.Future;
 
@@ -22,15 +22,15 @@ public class NewsServiceImplementer implements NewsServices {
 
     public Future<Articles> getArticles(String source) throws InterruptedException {
         return newsService.getArticles(source);
-    };
+    }
 
     public Future<Articles> getArticles(String source, String sort) throws InterruptedException {
         return newsService.getArticles(source, sort);
-    };
+    }
 
 
     public Future<Sources> getSources(String category, String language) throws InterruptedException {
         return newsService.getSources(category, language);
-    };
+    }
 
 }

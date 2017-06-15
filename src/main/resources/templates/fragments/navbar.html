@@ -1,55 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
       lang="en">
 <head>
 </head>
 <body>
 <div th:fragment="navbar" th:remove="tag">
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-                        aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/news">Asynchronousity</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/news/sources">Sources</a></li>
-                    <li><a href="/news/top">Top</a></li>
-                    <li><a href="/news/latest">Latest</a></li>
-                    <li><a href="/news/about">About</a></li>
-                </ul>
-            </div>
+    <nav class="navbar navbar-expand-md navbar-inverse fixed-top bg-inverse">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="/news/sources">Sources<span class="sr-only">(current)</span></a></li>
+                <li class="nav-item active"><a class="nav-link" href="/news/top">Top</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/news/latest">Latest</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/news/about">About</a></li>
+            </ul>
         </div>
     </nav>
-</div>
-
-
-<div th:fragment="sidebar" th:remove="tag">
-    <div class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">
-            <li class="active"><a href="/news">News<span class="sr-only">(current)</span></a></li>
-            <li><a href="/news/top">Top</a></li>
-            <li><a href="/news/latest">Latest</a></li>
-        </ul>
-        <ul class="nav nav-sidebar">
-            <li><a href="/news/sources/Business">Business</a></li>
-            <li><a href="/news/sources/Entertainment">Entertainment</a></li>
-            <li><a href="/news/sources/Gaming">Gaming</a></li>
-            <li><a href="/news/sources/General">General</a></li>
-            <li><a href="/news/sources/Music">Music</a></li>
-            <li><a href="/news/sources/Politics">Politics</a></li>
-            <li><a href="/news/sources/Science-and-nature">Science</a></li>
-            <li><a href="/news/sources/Sport">Sport</a></li>
-            <li><a href="/news/sources/Technology">Technology</a></li>
-        </ul>
-    </div>
 </div>
 </body>
 </html>

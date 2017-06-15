@@ -4,26 +4,26 @@
 <head>
 </head>
 <body>
-    <div th:fragment="sources" th:remove="tag">
-        <h2 class="page-header" th:text="${category} + ' News Sources'">Category sources</h2>
-        <div class="table-responsive">
-            <table class="table table-striped" th:if="${sources != null and not #lists.isEmpty(sources)}">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Country</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="source : ${sources}">
-                        <td><a th:href="'/news/articles/' + ${source.id}" th:text="${source.name}">Name</a></td>
-                        <td th:text="${source.description}">Description</td>
-                        <td th:text="${source.country}">Country</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div th:fragment="sources" th:remove="tag">
+<h2 th:text="${category} + ' News Sources'">Category sources</h2>
+<div class="table-responsive">
+    <table class="table table-striped" th:if="${sources != null and not #lists.isEmpty(sources)}">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="source : ${sources}">
+                <td><a th:href="'/news/articles/' + ${source.id}" th:text="${source.name}">Name</a></td>
+                <td th:text="${source.description}">Description</td>
+                <td th:text="${source.country}">Country</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
 </body>
 </html>

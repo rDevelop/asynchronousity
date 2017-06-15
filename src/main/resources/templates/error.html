@@ -2,57 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org"
       lang="en">
 <head>
-    <th:block th:switch="${fragment}" th:remove="tag">
-        <th:block th:case="*">
-            <!--/*/ <th:block th:include="fragments/inc-cover :: head"></th:block> /*/-->
-        </th:block>
-    </th:block>
+    <!--/*/ <th:block th:include="fragments/inc-cover :: head"></th:block> /*/-->
     <title>Asynchronousity</title>
 </head>
 <body>
-    <div class="site-wrapper">
-    <th:block th:switch="${fragment}" th:remove="tag">
-        <th:block th:case="*">
-            <!--/*/ <th:block th:include="fragments/inc-cover :: head"></th:block> /*/-->
-            <div class="site-wrapper-inner">
-                <div class="cover-container">
-                    <div class="masthead clearfix">
-                        <div class="inner">
-                            <h3 class="masthead-brand">Asyncronousity</h3>
-                            <nav>
-                                <ul class="nav masthead-nav">
-                                    <li class="active"><a href="" th:href="@{/}">Home</a></li>
-                                    <li><a href="" th:href="@{/news/top}">Top</a></li>
-                                    <li><a href="" th:href="@{/news/latest}">Latest</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                    <div class="inner cover" >
-                        <!--/*/ <th:block th:include="fragments/cover :: error"></th:block> /*/-->
-                        <p class="lead">
-                        <canvas id="Canvas">
-                            rlit.us
-                        </canvas>
-                        </p>
-                    </div>
-                    <div class="mastfoot">
-                        <div class="inner">
-                            <p class="text-muted">&copy; 2017 rlit.us &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-                        </div>
-                    </div>
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="cover-container">
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h3 class="masthead-brand">Asynchronousity News Feed</h3>
+                    <nav class="nav nav-masthead">
+                        <a class="nav-link active" href="/">Home</a>
+                        <a class="nav-link" href="/news/top">Top</a>
+                        <a class="nav-link" href="/news/latest">Latest</a>
+                    </nav>
                 </div>
             </div>
-        </th:block>
-    </th:block>
+            <div class="inner cover">
+                <h1 class="cover-heading">Oops.. We have an error</h1>
+                <p class="lead">I'm not blaming you, but did you do something crazy?</p>
+                <p class="lead">
+                    <a href="/" class="btn btn-lg btn-secondary">Continue</a>
+                </p>
+            </div>
+            <div class="mastfoot">
+                <div class="inner">
+                    <p>authored by <a href="http://www.rlit.us">rlit.us</a> - code <a href="https://github.com/rDevelop/asynchronousity">github</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="/js/maxbit.js"></script>
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="/js/ie10-viewport-bug-workaround.js"></script>
+</div>
+<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
 </body>
 </html>

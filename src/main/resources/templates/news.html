@@ -7,28 +7,45 @@
 </head>
 <body>
 <!--/*/ <th:block th:include="fragments/navbar :: navbar"></th:block> /*/-->
-<div class="container-fluid">
-    <div class="row">
-        <!--/*/ <th:block th:include="fragments/navbar :: sidebar"></th:block> /*/-->
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <!--/*/ <th:block th:include="fragments/banner :: images"></th:block> /*/-->
-            <th:block th:switch="${title}" th:remove="tag">
-                <th:block th:case="'Articles'">
-                    <!--/*/ <th:block th:include="fragments/articles :: articles"></th:block> /*/-->
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-faded sidebar">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item"><a class="nav-link" href="/news">News<span class="sr-only">(current)</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/news/top">Top</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/news/latest">Latest</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li class="nav-item"><a class="nav-link" href="/news/sources/Business">Business</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/news/sources/Entertainment">Entertainment</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/news/sources/Gaming">Gaming</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/news/sources/General">General</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/news/sources/Music">Music</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/news/sources/Politics">Politics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/news/sources/Science-and-nature">Science</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/news/sources/Sport">Sport</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/news/sources/Technology">Technology</a></li>
+                </ul>
+            </nav>
+            <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3" role="main">
+                <h5>Asynchronousity News Feed</h5>
+                <section class="row text-center placeholders">
+                <!--/*/ <th:block th:include="fragments/banner :: images"></th:block> /*/-->
+                </section>
+                <th:block th:switch="${title}" th:remove="tag">
+                    <th:block th:case="'Articles'">
+                        <!--/*/ <th:block th:include="fragments/articles :: articles"></th:block> /*/-->
+                    </th:block>
+                    <th:block th:case="'Sources'">
+                        <!--/*/ <th:block th:include="fragments/sources :: sources"></th:block> /*/-->
+                    </th:block>
+                    <th:block th:case="'About'">
+                        <!--/*/ <th:block th:include="fragments/about :: about"></th:block> /*/-->
+                    </th:block>
                 </th:block>
-                <th:block th:case="'Sources'">
-                    <!--/*/ <th:block th:include="fragments/sources :: sources"></th:block> /*/-->
-                </th:block>
-                <th:block th:case="'About'">
-                    <!--/*/ <th:block th:include="fragments/about :: about"></th:block> /*/-->
-                </th:block>
-            </th:block>
+            </main>
         </div>
     </div>
-</div>
-<!-- Bootstrap core JavaScript
-================================================== -->
 <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
 </body>
 </html>

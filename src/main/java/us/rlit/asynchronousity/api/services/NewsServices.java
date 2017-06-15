@@ -1,7 +1,7 @@
-package us.rlit.asyncronousity.api.services;
+package us.rlit.asynchronousity.api.services;
 
-import us.rlit.asyncronousity.api.domain.Articles;
-import us.rlit.asyncronousity.api.domain.Sources;
+import us.rlit.asynchronousity.api.domain.Articles;
+import us.rlit.asynchronousity.api.domain.Sources;
 
 import java.util.concurrent.Future;
 

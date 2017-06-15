@@ -5,24 +5,21 @@
 </head>
 <body>
 <div th:fragment="images" th:remove="tag">
-    <div class="row placeholders" th:if="${bannerImages != null and not #lists.isEmpty(bannerImages)}">
-        <th:block th:each="bannerImage : ${bannerImages}" th:remove="tag">
-        <div class="col-xs-2 col-sm-2 placeholder">
-
-
-            <a href="/news/sources"
-               th:if="${bannerImage.category} == sources">
-                <img th:src="${bannerImage.imageUrl}" width="50" height="50" class="img-responsive" th:alt="${bannerImage.altText}"/>
-            </a>
-
-            <a th:href="'/news/articles/' + ${bannerImage.sourceName}" th:if="${bannerImage.category} != sources">
-            <img th:src="${bannerImage.imageUrl}" width="50" height="50" class="img-responsive" th:alt="${bannerImage.altText}"/>
-            </a>
-            <h4 th:text="${bannerImage.sourceName}">Source</h4>
-            <span class="text-muted" th:text="${bannerImage.category}">category</span>
-        </div>
-        </th:block>
-    </div>
+<div th:if="${bannerImages != null and not #lists.isEmpty(bannerImages)}" th:remove="tag">
+    <th:block th:each="bannerImage : ${bannerImages}" th:remove="tag">
+                        <div class="col-6 col-sm-3 placeholder">
+                            <a href="/news/sources"
+                               th:if="${bannerImage.category} == sources">
+                                <img th:src="${bannerImage.imageUrl}" width="200" height="200" class="img-fluid rounded-circle" th:alt="${bannerImage.altText}"/>
+                            </a>
+                            <a th:href="'/news/articles/' + ${bannerImage.sourceName}" th:if="${bannerImage.category} != sources">
+                                <img th:src="${bannerImage.imageUrl}" width="200" height="200" class="img-fluid rounded-circle" th:alt="${bannerImage.altText}"/>
+                            </a>
+                            <h4 th:text="${bannerImage.sourceName}">Source</h4>
+                            <span class="text-muted" th:text="${bannerImage.category}">category</span>
+                        </div>
+    </th:block>
+</div>
 </div>
 </body>
 </html>
